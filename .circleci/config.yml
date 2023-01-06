@@ -12,7 +12,7 @@ jobs:
     steps:
       - checkout
       - run:
-          command: npm 4un lint
+          command: npm run lint
           
   test:
     docker: 
