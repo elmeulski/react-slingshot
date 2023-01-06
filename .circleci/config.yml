@@ -4,32 +4,35 @@ version: 2.1
 
 # Define a job to be invoked later in a workflow.
 # See: https://circleci.com/docs/2.0/configuration-reference/#jobs
-jobs:
-  build:
-    docker:
-      - image: cimg/base:stable
-
+commands:
+  basic-start:
     steps:
       - checkout
       - run: npm i
+
+jobs:
+  build:
+    docker:
+      - image: circleci/node:13.8.0
+
+    steps:
+      - basic-start
       - run: npm run lint
           
   test:
     docker: 
-      - image: cimg/base:stable
+      - image: circleci/node:13.8.0
 
     steps:
-      - checkout
-      - run: npm i
+      - basic-start
       - run: npm run test
 
   analyse:
     docker: 
-      - image: cimg/base:stable
+      - image: circleci/node:13.8.0
 
     steps:
-      - checkout
-      - run: npm i
+      - basic-start
       - run: npm audit
 
 workflows:
